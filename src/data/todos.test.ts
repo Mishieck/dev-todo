@@ -10,6 +10,16 @@ describe('Todos', () => {
     expect(todos.read().next().value).toMatchObject(todo);
   });
 
+  it('should update todos', () => {
+    const todo = Todo.fromContent('Learn Ink.');
+    const todos = new Todos([todo]);
+    expect(todo.isCompleted).toEqual(false);
+    todos.update(todo.id);
+    expect(todo.isCompleted).toEqual(true);
+    todos.update(todo.id);
+    expect(todo.isCompleted).toEqual(false);
+  });
+
   it('should delete todos', () => {
     const first = Todo.fromContent('Learn Ink.');
     const second = Todo.fromContent('Learn Bun.');

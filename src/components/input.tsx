@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = props => {
   };
 
   return (
-    <Box borderStyle="round">
+    <Box borderStyle="round" borderColor={isFocused ? undefined : 'gray'}>
       <TextInput
         value={text}
         placeholder="Enter todo"

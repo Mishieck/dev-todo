@@ -1,6 +1,7 @@
-import { type React } from 'react';
+import { type React, useEffect } from 'react';
 import { Box, Spacer, Text, useFocus, useFocusManager, useInput } from "ink";
 import { Todo } from "../data/todo"
+import { useTodoItemFocused } from '../hooks/todo-item-focused';
 
 export type TodoProps = {
   todo: Todo;
@@ -15,6 +16,7 @@ export const TodoUi: React.FC<TodoProps> = props => {
 
   const { isFocused } = useFocus();
   const { focusNext, focusPrevious, disableFocus } = useFocusManager();
+  const { focusedItems } = useTodoItemFocused();
 
   useInput((text) => {
     if (!isFocused) return;
@@ -38,6 +40,14 @@ export const TodoUi: React.FC<TodoProps> = props => {
       }
     }
   });
+
+  useEffect(
+    () => {
+      if (isFocused) focusedItems.add(id);
+      else focusedItems.delete(id);
+    },
+    [isFocused]
+  );
 
   return (
     <Box flexDirection="column" paddingX={1}>

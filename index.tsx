@@ -7,8 +7,7 @@ import { Input } from './src/components/input';
 import type { TodoProps } from './src/components/todo';
 import { WIDTH } from './src/utils';
 import { Maybe } from './src/components/maybe';
-import { useTodoItemFocused } from './src/hooks/todo-item-focused';
-import { TodoFocus, todoFocus } from './src/objects/todo-focus';
+import { todoFocus } from './src/objects/todo-focus';
 
 const todos = new Todos();
 

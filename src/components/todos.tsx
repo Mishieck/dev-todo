@@ -4,7 +4,7 @@ import type { Todo } from "../data/todo";
 import { TodoUi, type TodoProps } from "./todo";
 import { Divider } from "./divider";
 import { WIDTH } from '../utils';
-import { useTodoItemFocused } from '../hooks/todo-item-focused';
+import { todoFocus } from '../objects/todo-focus';
 
 export type TodosProps = {
   todos: Array<Todo>;
@@ -15,8 +15,7 @@ export type TodosProps = {
 export const TodosUi: React.FC<TodosProps> = props => {
   const { todos, onDelete, onUpdate } = props as TodosProps; // TODO: Remove type cast
 
-  const { isFocused: initialIsFocused, focusedItems } = useTodoItemFocused();
-  const [isFocused, setIsFocused] = useState(initialIsFocused);
+  const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
 
   const renderTodo = (todo: Todo, index: number) => {
     const todoUi = (
@@ -36,7 +35,7 @@ export const TodosUi: React.FC<TodosProps> = props => {
 
   useEffect(
     () => {
-      focusedItems.$addObserver('todos-ui', setIsFocused);
+      todoFocus.addObserver('update', ({ payload }) => setIsFocused(payload));
     },
     []
   );

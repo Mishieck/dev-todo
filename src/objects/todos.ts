@@ -28,6 +28,10 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     delete: new Set(),
   };
 
+  get isEmpty() {
+    return this.length === 0;
+  }
+
   add(todo: Todo) {
     this.push(todo);
     this.notifyObservers('add', todo);

@@ -34,6 +34,18 @@ describe('Todos', () => {
     expect(todos.length).toEqual(0);
   });
 
+  it('should indicate if it is empty', () => {
+    const todos = new Todos();
+    expect(todos.isEmpty).toEqual(true);
+
+    const todo = Todo.fromContent('Learn Ink.');
+    todos.add(todo);
+    expect(todos.isEmpty).toEqual(false);
+
+    todos.delete(todo.id);
+    expect(todos.isEmpty).toEqual(true);
+  });
+
   it('should handle reactivity using the observer model', () => {
     const first = Todo.fromContent('Learn Ink.');
     const second = Todo.fromContent('Learn Bun.');

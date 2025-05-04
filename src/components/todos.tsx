@@ -13,7 +13,6 @@ export type TodosProps = {};
 export const TodosUi: React.FC<TodosProps> = () => {
   const [todoItems, setTodoItems] = useState<Array<Todo>>([...todos]);
   const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
-  const display = todos.length > 0;
 
   const updateTodoItems: TodosEventObserver = () => setTodoItems([...todos]);
 
@@ -56,7 +55,7 @@ export const TodosUi: React.FC<TodosProps> = () => {
   );
 
   return (
-    <Maybe display={display}>
+    <Maybe display={!todos.isEmpty}>
       <Box
         flexDirection="column"
         borderStyle="round"

@@ -6,6 +6,8 @@ import { Todo } from '../data/todo';
 
 export type InputProps = {};
 
+export const INPUT_ID = 'input';
+
 export const Input: React.FC<InputProps> = () => {
   const [text, setText] = useState('');
 
@@ -18,7 +20,7 @@ export const Input: React.FC<InputProps> = () => {
   };
 
   useInput((text, _key) => {
-    if (!isFocused && text === 'j') {
+    if (text === 'j' && !isFocused) {
       focusNext();
       focusNext();
     }
@@ -30,7 +32,11 @@ export const Input: React.FC<InputProps> = () => {
   };
 
   return (
-    <Box borderStyle="round" borderColor={isFocused ? undefined : 'gray'}>
+    <Box
+      id={INPUT_ID}
+      borderStyle="round"
+      borderColor={isFocused ? undefined : 'gray'}
+    >
       <TextInput
         value={text}
         placeholder="Enter todo"

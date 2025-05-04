@@ -79,3 +79,6 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     for (const notify of this.#observers[event]) notify({ name: event, payload });
   }
 }
+
+
+export const todos = new Todos();

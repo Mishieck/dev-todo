@@ -1,14 +1,13 @@
 import { useState, type React } from 'react';
-import TextInput, { type Props } from 'ink-text-input';
+import TextInput from 'ink-text-input';
 import { Box, useInput, useFocusManager, useFocus } from 'ink';
+import { todos } from '../objects/todos';
+import { Todo } from '../data/todo';
 
-export type InputProps = {
-  onSubmit: Props['onSubmit'];
-};
+export type InputProps = {};
 
-export const Input: React.FC<InputProps> = props => {
+export const Input: React.FC<InputProps> = () => {
   const [text, setText] = useState('');
-  const { onSubmit } = props;
 
   const { isFocused } = useFocus({ autoFocus: true });
   const { focusNext } = useFocusManager();
@@ -18,7 +17,7 @@ export const Input: React.FC<InputProps> = props => {
     setText(text);
   };
 
-  useInput((text, key) => {
+  useInput((text, _key) => {
     if (!isFocused && text === 'j') {
       focusNext();
       focusNext();
@@ -26,7 +25,7 @@ export const Input: React.FC<InputProps> = props => {
   });
 
   const handleSubmit = (value: string) => {
-    onSubmit(value);
+    todos.add(Todo.fromContent(value));
     setText('');
   };
 

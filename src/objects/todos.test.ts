@@ -10,6 +10,15 @@ describe('Todos', () => {
     expect(todos[0]).toMatchObject(todo);
   });
 
+  it('should initialize todos', () => {
+    const content = 'Learn Ink.';
+    const todo = Todo.fromContent(content);
+    const todos = new Todos();
+    todos.initialize([todo]);
+    expect(todos[0]).toMatchObject(todo);
+  });
+
+
   it('should update todos', () => {
     const todo = Todo.fromContent('Learn Ink.');
     const todos = new Todos(todo);

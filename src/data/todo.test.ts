@@ -38,4 +38,19 @@ describe('Todo', () => {
     todo.dateCompleted = new Date();
     expect(todo.isCompleted).toEqual(true);
   });
+
+  it('should convert to JSON object', () => {
+    const todo = Todo.fromContent('Learn Ink.');
+    const data = todo.toJSON();
+
+    const keys = [
+      'id',
+      'content',
+      'dateCreatedTimestamp',
+      'dateCompletedTimestamp'
+    ];
+
+    expect(Object.keys(data).toSorted()).toEqual(keys.toSorted());
+    expect(todo).toMatchObject(data);
+  });
 });

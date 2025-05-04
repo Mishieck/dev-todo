@@ -14,7 +14,7 @@ export const TodosUi: React.FC<TodosProps> = () => {
   const [todoItems, setTodoItems] = useState<Array<Todo>>([...todos]);
   const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
 
-  const updateTodoItems: TodosEventObserver = () => setTodoItems([...todos]);
+  const updateTodoItems = () => setTodoItems([...todos]);
 
   const handleDelete: TodoProps['onDelete'] = (id) => {
     todos.delete(id);
@@ -45,9 +45,10 @@ export const TodosUi: React.FC<TodosProps> = () => {
 
   useEffect(
     () => {
-      todos.addObserver('add', updateTodoItems);
-      todos.addObserver('delete', updateTodoItems);
-      todos.addObserver('update', updateTodoItems);
+      todos.addObserver('initialize', () => updateTodoItems());
+      todos.addObserver('add', () => updateTodoItems());
+      todos.addObserver('delete', () => updateTodoItems());
+      todos.addObserver('update', () => updateTodoItems());
 
       todoFocus.addObserver('update', ({ payload }) => setIsFocused(payload));
     },

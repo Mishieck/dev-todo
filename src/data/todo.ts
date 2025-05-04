@@ -50,4 +50,9 @@ export class Todo extends TodoData {
   get isCompleted(): boolean {
     return this.dateCompletedTimestamp !== 0;
   }
+
+  toJSON(): TodoData {
+    const { id, content, dateCreatedTimestamp, dateCompletedTimestamp } = this;
+    return { id, content, dateCreatedTimestamp, dateCompletedTimestamp };
+  }
 } 

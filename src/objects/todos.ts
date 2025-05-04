@@ -1,19 +1,28 @@
-import type { Todo } from "../data/todo";
+import { Todo, type TodoData } from "../data/todo";
 import type { Event, Observable, Observer } from "./observable";
 
-export type TodosEventName = 'add' | 'update' | 'delete';
+export type TodosEventName = 'initialize' | 'add' | 'update' | 'delete';
 export type TodosEvent<Name extends TodosEventName> = Event<Name, Todo>;
 
+export type InitializeEvent = TodosEvent<'initialize'>;
 export type AddEvent = TodosEvent<'add'>;
 export type UpdateEvent = TodosEvent<'update'>;
 export type DeleteEvent = TodosEvent<'delete'>;
 
+export type InitializeEventObserver = Observer<InitializeEvent>;
 export type AddEventObserver = Observer<AddEvent>;
 export type UpdateEventObserver = Observer<UpdateEvent>;
 export type DeleteEventObserver = Observer<DeleteEvent>;
 
-export type TodosEventObserver = Observer<AddEvent | UpdateEvent | DeleteEvent>;
-export type TodosEventRecord = Record<TodosEventName, Todo>;
+export type TodosEventObserver =
+  Observer<InitializeEvent | AddEvent | UpdateEvent | DeleteEvent>;
+
+export type TodosEventRecord = {
+  add: Todo;
+  delete: Todo;
+  initialize: Array<Todo>;
+  update: Todo;
+};
 
 /**
  * Contains all the todo items.
@@ -23,6 +32,7 @@ export type TodosEventRecord = Record<TodosEventName, Todo>;
  */
 export class Todos extends Array<Todo> implements Observable<TodosEventName, TodosEventRecord> {
   #observers: Record<TodosEventName, Set<TodosEventObserver>> = {
+    initialize: new Set(),
     add: new Set(),
     update: new Set(),
     delete: new Set(),
@@ -30,6 +40,14 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
 
   get isEmpty() {
     return this.length === 0;
+  }
+
+  /**
+   * Adds initial todo items.
+   */
+  initialize(todos: Array<TodoData>) {
+    this.push(...todos.map(data => new Todo(data)));
+    this.notifyObservers('initialize', this);
   }
 
   add(todo: Todo) {

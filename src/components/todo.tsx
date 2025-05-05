@@ -12,7 +12,8 @@ export const TodoUi: React.FC<TodoProps> = props => {
   const { id, content, dateCreated, dateCompleted, isCompleted } = todo;
   const status = isCompleted ? '✓' : 'o';
 
-  const { isFocused } = useFocus();
+  const { isFocused } = useFocus({ id });
+
   useEffect(
     () => {
       if (isFocused) todoFocus.add(id);

@@ -1,5 +1,7 @@
+import { INPUT_ID } from "../components/input";
 import { Todo, type TodoData } from "../data/todo";
 import type { Event, Observable, Observer } from "./observable";
+import { todoFocus } from "./todo-focus";
 
 export type TodosEventName = 'initialize' | 'add' | 'update' | 'delete';
 export type TodosEvent<Name extends TodosEventName> = Event<Name, Todo>;
@@ -84,6 +86,17 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     if (indexOfTodo === -1) return;
     const [todo] = this.splice(indexOfTodo, 1);
     this.notifyObservers('delete', todo);
+  }
+
+  getNextFocusableItem(direction: -1 | 1): string | void {
+    const current = todoFocus.values().next().value;
+    const items = this.toSorted();
+    if (!current) return items.at(direction === 1 ? 0 : -1)?.id;
+    const indexOfCurrent = items.findIndex(todo => todo.id == current);
+    if (indexOfCurrent === -1) return;
+    const indexOfNext = indexOfCurrent + direction;
+    if (indexOfNext === -1 || indexOfNext === items.length) return INPUT_ID;
+    return items.at(indexOfNext)?.id;
   }
 
   addObserver<Ev extends TodosEventName>(

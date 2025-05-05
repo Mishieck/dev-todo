@@ -7,23 +7,24 @@ import { WIDTH } from '../utils';
 import { todoFocus } from '../objects/todo-focus';
 import { Maybe } from './maybe';
 import { todos } from '../objects/todos';
+import { useFocusNext } from '../hooks/focus-next';
 
 export type TodosProps = {};
 
 export const TodosUi: React.FC<TodosProps> = () => {
   const [todoItems, setTodoItems] = useState<Array<Todo>>(todos.toSorted());
   const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
-  const { focusNext, focusPrevious } = useFocusManager();
+  const focusNext = useFocusNext();
 
   const updateTodoItems = () => setTodoItems(todos.toSorted());
 
   const handleDelete = () => {
     const id = todoFocus.values().next().value;
     if (!id) return;
+    focusNext(1);
     todos.delete(id);
-    updateTodoItems();
     todoFocus.delete(id);
-    focusNext();
+    updateTodoItems();
   };
 
   const handleUpdate = () => {
@@ -33,17 +34,16 @@ export const TodosUi: React.FC<TodosProps> = () => {
     updateTodoItems();
   };
 
-  useInput((text) => {
+  useInput((text, key) => {
     if (!isFocused) return;
 
     switch (text) {
       case 'j': {
-        focusNext();
-        focusNext(); // TODO: Find out why this extra call is necessary
+        focusNext(1);
         break;
       }
       case 'k': {
-        focusPrevious();
+        focusNext(-1);
         break;
       }
       case 'u': {
@@ -54,6 +54,8 @@ export const TodosUi: React.FC<TodosProps> = () => {
         handleDelete();
         break;
       }
+      default:
+        if (key.tab) focusNext(key.shift ? -1 : 1);
     }
   });
 

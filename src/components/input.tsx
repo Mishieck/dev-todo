@@ -3,6 +3,7 @@ import TextInput from 'ink-text-input';
 import { Box, useInput, useFocusManager, useFocus } from 'ink';
 import { todos } from '../objects/todos';
 import { Todo } from '../data/todo';
+import { useFocusNext } from '../hooks/focus-next';
 
 export type InputProps = {};
 
@@ -10,19 +11,20 @@ export const INPUT_ID = 'input';
 
 export const Input: React.FC<InputProps> = () => {
   const [text, setText] = useState('');
-
-  const { isFocused } = useFocus({ autoFocus: true });
-  const { focusNext } = useFocusManager();
+  const { isFocused } = useFocus({ autoFocus: true, id: INPUT_ID });
+  const focusNext = useFocusNext();
 
   const handleInput = (text: string) => {
     if (!isFocused) return;
     setText(text);
   };
 
-  useInput((text, _key) => {
-    if (text === 'j' && !isFocused) {
-      focusNext();
-      focusNext();
+  useInput((text, key) => {
+    if (isFocused) {
+      if (key.tab) focusNext(key.shift ? -1 : 1);
+    } else {
+      if (text === 'j') focusNext(1);
+      else if (text === 'k') focusNext(-1);
     }
   });
 

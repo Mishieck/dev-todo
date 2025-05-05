@@ -11,17 +11,17 @@ import { todos } from '../objects/todos';
 export type TodosProps = {};
 
 export const TodosUi: React.FC<TodosProps> = () => {
-  const [todoItems, setTodoItems] = useState<Array<Todo>>([...todos]);
+  const [todoItems, setTodoItems] = useState<Array<Todo>>(todos.toSorted());
   const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
   const { focusNext, focusPrevious } = useFocusManager();
 
-  const updateTodoItems = () => setTodoItems([...todos]);
+  const updateTodoItems = () => setTodoItems(todos.toSorted());
 
   const handleDelete = () => {
     const id = todoFocus.values().next().value;
     if (!id) return;
     todos.delete(id);
-    setTodoItems([...todos]);
+    updateTodoItems();
     todoFocus.delete(id);
   };
 
@@ -29,7 +29,7 @@ export const TodosUi: React.FC<TodosProps> = () => {
     const id = todoFocus.values().next().value;
     if (!id) return;
     todos.update(id);
-    setTodoItems([...todos]);
+    updateTodoItems();
   };
 
   useInput((text) => {

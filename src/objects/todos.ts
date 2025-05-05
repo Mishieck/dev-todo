@@ -40,12 +40,6 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     delete: new Set(),
   };
 
-  override toSorted(_compareFn?: ((a: Todo, b: Todo) => number) | undefined): Todo[] {
-    return super.toSorted(
-      (first, second) => second.dateCreatedTimestamp - first.dateCreatedTimestamp
-    );
-  }
-
   get isEmpty() {
     return this.length === 0;
   }
@@ -59,7 +53,7 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
   }
 
   add(todo: Todo) {
-    this.push(todo);
+    this.unshift(todo);
     this.notifyObservers('add', todo);
   }
 

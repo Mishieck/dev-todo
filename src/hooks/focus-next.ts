@@ -5,7 +5,7 @@ import { todos } from "../objects/todos";
 
 export const getNextFocusableItem = (direction: -1 | 1): string | void => {
   const current = todoFocus.values().next().value;
-  if (!current) return todos.at(direction === 1 ? 0 : -1)?.id;
+  if (!current) return todos.at(direction === 1 ? 0 : -1)?.id ?? INPUT_ID;
   const indexOfCurrent = todos.findIndex(todo => todo.id == current);
   if (indexOfCurrent === -1) return;
   const indexOfNext = indexOfCurrent + direction;

@@ -36,6 +36,7 @@ export const Input: React.FC<InputProps> = () => {
       id={INPUT_ID}
       borderStyle="round"
       borderColor={isFocused ? undefined : 'gray'}
+      paddingX={1}
     >
       <TextInput
         value={text}

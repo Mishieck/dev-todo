@@ -23,6 +23,7 @@ export const TodosUi: React.FC<TodosProps> = () => {
     todos.delete(id);
     updateTodoItems();
     todoFocus.delete(id);
+    focusNext();
   };
 
   const handleUpdate = () => {

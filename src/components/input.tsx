@@ -21,7 +21,8 @@ export const Input: React.FC<InputProps> = () => {
 
   useInput((text, key) => {
     if (isFocused) {
-      if (key.tab) focusNext(key.shift ? -1 : 1);
+      if (key.tab || key.downArrow) focusNext(key.shift ? -1 : 1);
+      else if (key.upArrow) focusNext(-1);
     } else {
       if (text === 'j') focusNext(1);
       else if (text === 'k') focusNext(-1);

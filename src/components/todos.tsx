@@ -57,6 +57,9 @@ export const TodosUi: React.FC<TodosProps> = () => {
       default:
         if (key.tab) focusNext(key.shift ? -1 : 1);
     }
+
+    if (key.downArrow) focusNext(1);
+    else if (key.upArrow) focusNext(-1);
   });
 
   const renderTodo = (todo: Todo, index: number) => {

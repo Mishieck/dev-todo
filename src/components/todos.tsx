@@ -1,4 +1,4 @@
-import { type React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, useInput, useFocusManager } from "ink";
 import type { Todo } from "../data/todo";
 import { TodoUi } from "./todo";

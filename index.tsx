@@ -1,6 +1,6 @@
 #!/bin/env bun
 
-import { type React, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { render, Box } from 'ink';
 import { TodosUi } from './src/components/todos';
 import { Input } from './src/components/input';

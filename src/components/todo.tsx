@@ -1,4 +1,4 @@
-import { type React, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Spacer, Text, useFocus } from "ink";
 import { Todo } from "../data/todo"
 import { todoFocus } from '../objects/todo-focus';

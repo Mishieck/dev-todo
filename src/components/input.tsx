@@ -1,4 +1,4 @@
-import { useState, type React } from 'react';
+import React, { useState } from 'react';
 import TextInput from 'ink-text-input';
 import { Box, useInput, useFocusManager, useFocus } from 'ink';
 import { todos } from '../objects/todos';
@@ -36,7 +36,6 @@ export const Input: React.FC<InputProps> = () => {
 
   return (
     <Box
-      id={INPUT_ID}
       borderStyle="round"
       borderColor={isFocused ? undefined : 'gray'}
       paddingX={1}

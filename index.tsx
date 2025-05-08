@@ -36,9 +36,11 @@ const App: React.FC = () => {
   );
 
   return (
-    <Box flexDirection="column" width={WIDTH}>
-      <Input />
-      <TodosUi />
+    <Box justifyContent="center">
+      <Box flexDirection="column" width={WIDTH}>
+        <Input />
+        <TodosUi />
+      </Box>
     </Box>
   );
 };

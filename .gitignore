@@ -3,3 +3,6 @@ node_modules
 
 # Saved todo list
 todos.json
+
+# Images
+images/

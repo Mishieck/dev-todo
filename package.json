@@ -13,6 +13,10 @@
   ],
   "module": "index.tsx",
   "type": "module",
+  "main": "index.tsx",
+  "bin": {
+    "dev-todo": "index.tsx"
+  },
   "scripts": {
     "dev": "bun run index.tsx"
   },

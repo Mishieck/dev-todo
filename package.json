@@ -1,5 +1,5 @@
 {
-  "name": "ink-bun-todo",
+  "name": "dev-todo",
   "version": "0.1.0",
   "description": "A TUI todo app created using Ink and Bun.",
   "keywords": [

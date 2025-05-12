@@ -12,11 +12,11 @@ A TUI todo app written using [Ink](https://github.com/vadimdemedes/ink) and
 #### Add Todo
 
 Enter text into the input field and press enter to submit. 
-![Input field with text](./images/input-with-text.jpg)
+![Input field with text](https://github.com/user-attachments/assets/25a968e8-8186-48dd-ad23-7ced64bcaf5a)
 
 Every new todo item is added to the list below the input field.
 
-![Todo list with an item](./images/list-with-one-item.jpg)
+![Todo list with an item](https://github.com/user-attachments/assets/566ebc12-58f9-4b34-bf82-3e0e469273e2)
 
 #### Moving to the Todo List
 
@@ -45,7 +45,7 @@ The currently focused todo item in the list will be underlined. When any item
 in the todo list is focused, the todo list border will be bright, otherwise it
 will be dim.
 
-![Focused todo item](./images/focused-list.jpg)
+![Focused todo item](https://github.com/user-attachments/assets/d0cdc1b5-71e5-4da1-971c-3b504fbfdbed)
 
 #### Navigation
 
@@ -58,9 +58,7 @@ You can update the status of the current todo item by pressing `u`. If the todo
 item is not completed, it will marked as completed. If the todo item is 
 completed, its status will be reset.
 
-![List with completed todo item](./images/list-with-completed-todo-item.jpg)
-
+![List with completed todo item](https://github.com/user-attachments/assets/59707d5a-9e58-4e95-892a-57576a247811)
 #### Delete
 
 You can delete the current todo item by pressing `d`.
-

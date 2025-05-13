@@ -1,9 +1,27 @@
-# InkBunTodo
+# DevTodo
 
 A TUI todo app written using [Ink](https://github.com/vadimdemedes/ink) and
 [Bun](https://github.com/oven-sh/bun).
 
 ## Installation
+
+### Bun
+
+This package uses bun to run. So, make sure that you have Bun installed.
+
+### Package
+
+```sh
+npm i -g @mishieck/dev-todo
+```
+
+## Running
+
+After you have installed the package, you can run it using the command:
+
+```sh
+dev-todo
+```
 
 ## Usage
 

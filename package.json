@@ -24,7 +24,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@mishieck/observable": "npm:@jsr/mishieck__observable",
     "ink": "^4.4.1",
+    "ink-tab": "^5.1.0",
     "ink-text-input": "^5.0.1",
     "react": "^18.2.0"
   }

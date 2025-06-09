@@ -6,7 +6,21 @@ A TUI todo app written using [Ink](https://github.com/vadimdemedes/ink) and
 
 ## Installation
 
+You can install the app using NPM. Run the following command to install:
+
+```sh
+npm i -g @mishieck/dev-todo
+```
+
 ## Usage
+
+### Running
+
+You can run the app using the following command:
+
+```sh
+dev-todo
+```
 
 ### Input
 
@@ -65,7 +79,23 @@ completed, its status will be reset.
 
 You can delete the current todo item by pressing `d`.
 
-## Conventional Git Commit Messages
+## Configuration
+
+You can configure a custom file for storing todo items. The default file used is
+stored in the same location as the location of the app. The default filename is 
+`todos.json`. To configure a custom file, set the environment variable 
+`DEV_TODO` to the desired file location. The directory in which the file is 
+stored has to exist before attempting to store items there.
+
+### Example
+
+On linux you can use the following configuration in `.bashrc`:
+
+```sh
+DEV_TODO=~/Documents/todos.json
+```
+
+## Conventional Git Commit Messages Syntax
 
 Only single-line syntax is supported. The following syntax is used:
 

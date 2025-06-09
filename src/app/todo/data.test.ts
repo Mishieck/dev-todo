@@ -17,6 +17,14 @@ describe('Todo', () => {
 
   it('should match syntax', () => {
     let matches = Todo.getSyntaxMatches(
+      'Create todo project'
+    );
+
+    expect(matches).toMatchObject({
+      content: 'Create todo project'
+    });
+
+    matches = Todo.getSyntaxMatches(
       'feat: Add todo data class'
     );
 

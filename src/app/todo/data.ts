@@ -38,7 +38,7 @@ export class Todo extends TodoData {
   static defaultDate = new Date(0);
 
   static syntax =
-    /(?<action>[-a-z]+)(?:\((?<category>[-a-z\/]+)\))?:\s+(?<content>.+)/
+    /((?<action>[-a-z]+)(?:\((?<category>[-a-z\/]+)\))?:\s+)?(?<content>.+)/
 
   static getSyntaxMatches(text: string): SyntaxMatches {
     return text.match(Todo.syntax)?.groups as SyntaxMatches ?? {};

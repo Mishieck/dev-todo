@@ -1,8 +1,9 @@
 # DevTodo
 
-A TUI todo app written using [Ink](https://github.com/vadimdemedes/ink) and
-[Bun](https://github.com/oven-sh/bun). It supports
-[Conventional Git Commit Messages]() syntax for writing todos.
+A TUI todo app for software developers. It uses
+[Conventional Git Commit Messages]() syntax. It is written using
+[Ink](https://github.com/vadimdemedes/ink) and
+[Bun](https://github.com/oven-sh/bun). 
 
 ## Installation
 

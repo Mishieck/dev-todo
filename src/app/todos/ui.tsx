@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, useInput, useFocusManager } from "ink";
-import type { Todo } from "../data/todo";
-import { TodoUi } from "./todo";
-import { Divider } from "./divider";
-import { WIDTH } from '../utils';
-import { todoFocus } from '../objects/todo-focus';
-import { Maybe } from './maybe';
-import { todos } from '../objects/todos';
-import { useFocusNext } from '../hooks/focus-next';
+import { Box, useInput } from "ink";
+import type { Todo } from "@/app/todo/data";
+import { TodoUi } from "@/app/todo/ui";
+import { Divider } from "@/components/divider";
+import { WIDTH } from '@/utils';
+import { todoFocus } from '@/objects/todo-focus';
+import { Maybe } from '@/components/maybe';
+import { todos } from './object';
+import { useFocusNext } from '@/hooks/focus-next';
 
 export type TodosProps = {};
 
@@ -88,7 +88,7 @@ export const TodosUi: React.FC<TodosProps> = () => {
       <Box
         flexDirection="column"
         borderStyle="round"
-        borderColor={isFocused ? undefined : 'gray'}
+        borderDimColor={!isFocused}
       >
         {todoItems.map(renderTodo).flat()}
       </Box>

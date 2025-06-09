@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TextInput from 'ink-text-input';
-import { Box, useInput, useFocusManager, useFocus } from 'ink';
-import { todos } from '../objects/todos';
-import { Todo } from '../data/todo';
-import { useFocusNext } from '../hooks/focus-next';
+import { Box, useInput, useFocus } from 'ink';
+import { todos } from '@/app/todos/object';
+import { Todo } from '@/app/todo/data';
+import { useFocusNext } from '@/hooks/focus-next';
 
 export type InputProps = {};
 
@@ -37,7 +37,7 @@ export const Input: React.FC<InputProps> = () => {
   return (
     <Box
       borderStyle="round"
-      borderColor={isFocused ? undefined : 'gray'}
+      borderDimColor={!isFocused}
       paddingX={1}
     >
       <TextInput

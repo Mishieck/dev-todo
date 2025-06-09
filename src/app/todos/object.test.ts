@@ -1,6 +1,6 @@
 import { describe, it, expect } from "bun:test";
-import { Todos, type TodosEventName } from "./todos";
-import { Todo } from "../data/todo";
+import { Todos, type TodosEventName } from "./object";
+import { Todo } from "@/app/todo/data";
 
 describe('Todos', () => {
   it('should add and read todos', () => {
@@ -63,6 +63,7 @@ describe('Todos', () => {
     const observation: Record<TodosEventName, Todo | null> = {
       add: null,
       delete: null,
+      initialize: null,
       update: null
     };
 

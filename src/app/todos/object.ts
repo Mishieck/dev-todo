@@ -1,7 +1,14 @@
-import { INPUT_ID } from "../components/input";
-import { Todo, type TodoData } from "../data/todo";
-import type { Event, Observable, Observer } from "./observable";
-import { todoFocus } from "./todo-focus";
+import { INPUT_ID } from "@/app/input/ui";
+import { Todo, type TodoData, type TodoDataV010 } from "../todo/data";
+
+import type {
+  Event,
+  Observable,
+  Observer,
+  Observers
+} from "@mishieck/observable";
+
+import { todoFocus } from "@/objects/todo-focus";
 
 export type TodosEventName = 'initialize' | 'add' | 'update' | 'delete';
 export type TodosEvent<Name extends TodosEventName> = Event<Name, Todo>;
@@ -33,7 +40,7 @@ export type TodosEventRecord = {
  * release.
  */
 export class Todos extends Array<Todo> implements Observable<TodosEventName, TodosEventRecord> {
-  #observers: Record<TodosEventName, Set<TodosEventObserver>> = {
+  #observers: Observers<TodosEventName, TodosEventRecord> = {
     initialize: new Set(),
     add: new Set(),
     update: new Set(),
@@ -97,14 +104,14 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     event: Ev,
     observer: Observer<Event<Ev, TodosEventRecord[Ev]>>
   ): void {
-    this.#observers[event].add(observer as TodosEventObserver);
+    this.#observers[event].add(observer);
   }
 
   removeObserver<Ev extends TodosEventName>(
     event: Ev,
     observer: Observer<Event<Ev, TodosEventRecord[Ev]>>
   ): void {
-    this.#observers[event].delete(observer as TodosEventObserver);
+    this.#observers[event].delete(observer);
   }
 
   notifyObservers<Ev extends TodosEventName>(

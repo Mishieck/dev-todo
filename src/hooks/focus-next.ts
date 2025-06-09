@@ -1,7 +1,7 @@
 import { useFocus } from "ink";
-import { INPUT_ID } from "../components/input";
-import { todoFocus } from "../objects/todo-focus";
-import { todos } from "../objects/todos";
+import { INPUT_ID } from "@/app/input/ui";
+import { todoFocus } from "@/objects/todo-focus";
+import { todos } from "@/app/todos/object";
 
 export const getNextFocusableItem = (direction: -1 | 1): string | void => {
   const current = todoFocus.values().next().value;

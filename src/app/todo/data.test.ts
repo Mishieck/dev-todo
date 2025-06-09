@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import { Todo, TodoData } from "./todo";
+import { Todo, TodoData } from "./data";
 
 describe('Todo', () => {
   const content = 'Learn Ink.';
@@ -9,9 +9,32 @@ describe('Todo', () => {
   const data: TodoData = {
     id: Todo.generateId(),
     content,
+    action: null,
+    category: null,
     dateCreatedTimestamp,
     dateCompletedTimestamp
   };
+
+  it('should match syntax', () => {
+    let matches = Todo.getSyntaxMatches(
+      'feat: Add todo data class'
+    );
+
+    expect(matches).toMatchObject({
+      action: 'feat',
+      content: 'Add todo data class'
+    });
+
+    matches = Todo.getSyntaxMatches(
+      'fix(dev-todo/focus): Fix vim motions'
+    );
+
+    expect(matches).toMatchObject({
+      action: 'fix',
+      category: 'dev-todo/focus',
+      content: 'Fix vim motions'
+    });
+  })
 
   it('should create todo with correct data', () => {
     const todo = new Todo(data);
@@ -46,6 +69,8 @@ describe('Todo', () => {
     const keys = [
       'id',
       'content',
+      'action',
+      'category',
       'dateCreatedTimestamp',
       'dateCompletedTimestamp'
     ];

@@ -1,7 +1,8 @@
-# InkBunTodo
+# DevTodo
 
 A TUI todo app written using [Ink](https://github.com/vadimdemedes/ink) and
-[Bun](https://github.com/oven-sh/bun).
+[Bun](https://github.com/oven-sh/bun). It supports
+[Conventional Git Commit Messages]() syntax for writing todos.
 
 ## Installation
 
@@ -64,3 +65,23 @@ completed, its status will be reset.
 
 You can delete the current todo item by pressing `d`.
 
+## Conventional Git Commit Messages
+
+Only single-line syntax is supported. The following syntax is used:
+
+```
+action(category): content
+```
+
+where
+
+- `action`: is any action associated with the todo item. In addition to the
+  actions used in conventional commit messages, custom actions are allowed. For
+  example, if you would like to add a feature to a project, you can use `feat`
+  as the action.
+- `category`: this is the category to which the todo item belongs. For example,
+  you can use a project name and a project entity as the contents of a category.
+  If you are working on a web app, for example, the category may be
+  `portfolio/landing-page/header`.
+- `content`: a description of the todo item. You can use any description format
+  you like.

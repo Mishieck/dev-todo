@@ -14,22 +14,22 @@ const badges: Record<string, Badge> = {
   dateCreated: {
     icon: '+',
     colors: {
-      background: 'white',
-      foreground: 'black'
+      background: 'background',
+      foreground: 'foreground'
     }
   },
   dateCompleted: {
     icon: '✓',
     colors: {
-      background: 'green',
-      foreground: 'white'
+      background: 'greenBright',
+      foreground: 'black'
     }
   },
   pending: {
     icon: '',
     colors: {
-      background: 'white',
-      foreground: 'black'
+      background: 'background',
+      foreground: 'foreground'
     }
   }
 } as const;

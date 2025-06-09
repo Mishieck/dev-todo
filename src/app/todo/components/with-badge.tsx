@@ -21,10 +21,17 @@ export type WithBadgeProps = {
 export const WithBadge: React.FC<WithBadgeProps> = props => {
   const { icon, children, colors } = props;
   const { background, foreground } = colors;
+  const setColors = background !== 'background' && foreground !== 'foreground';
+  const backgroundColor = setColors ? background : undefined;
+  const foregroundColor = setColors ? foreground : undefined;
 
   return (
     <Text>
-      <Text color={background} inverse>
+      <Text
+        backgroundColor={backgroundColor}
+        color={foregroundColor}
+        inverse={!setColors}
+      >
         {' '}{icon}{' '}
       </Text>
       {' '}

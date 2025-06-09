@@ -1,7 +1,7 @@
 {
   "name": "@mishieck/dev-todo",
   "version": "0.1.0",
-  "description": "A TUI todo app created using Ink and Bun.",
+  "description": "A TUI todo app for software developers. It uses conventional git commit messages syntax.",
   "keywords": [
     "todo",
     "cli",
@@ -12,11 +12,21 @@
     "react"
   ],
   "module": "index.tsx",
+  "bin": {
+    "dev-todo": "./index.js"
+  },
   "type": "module",
   "main": "index.tsx",
-  "bin": {
-    "dev-todo": "index.tsx"
+  "author": {
+    "name": "Mishieck Mwale",
+    "email": "mishieckdev@gmail.com",
+    "url": "https://mishieck.vercel.app"
   },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mishieck/dev-todo/issues"
+  },
+  "homepage": "https://github.com/Mishieck/dev-todo#readme",
   "scripts": {
     "dev": "bun run index.tsx"
   },
@@ -28,7 +38,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@mishieck/observable": "npm:@jsr/mishieck__observable",
     "ink": "^4.4.1",
+    "ink-tab": "^5.1.0",
     "ink-text-input": "^5.0.1",
     "react": "^18.2.0"
   }

@@ -1,4 +1,4 @@
-import type { Observable, Observer, Event } from "./observable";
+import type { Observable, Observer, Event } from "@mishieck/observable";
 
 export type FocusEventName = 'update';
 export type FocusEvent = Event<FocusEventName, boolean>;

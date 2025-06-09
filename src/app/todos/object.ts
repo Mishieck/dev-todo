@@ -1,7 +1,7 @@
-import { INPUT_ID } from "../components/input";
-import { Todo, type TodoData } from "../data/todo";
-import type { Event, Observable, Observer } from "./observable";
-import { todoFocus } from "./todo-focus";
+import { INPUT_ID } from "@/app/input/ui";
+import { Todo, type TodoData } from "../todo/data";
+import { type Event, Observable, type Observer } from "@mishieck/observable";
+import { todoFocus } from "@/objects/todo-focus";
 
 export type TodosEventName = 'initialize' | 'add' | 'update' | 'delete';
 export type TodosEvent<Name extends TodosEventName> = Event<Name, Todo>;
@@ -26,34 +26,27 @@ export type TodosEventRecord = {
   update: Todo;
 };
 
-/**
- * Contains all the todo items.
- *
- * WARN: This may crash with `Array` interface. So, check on every ECMAScript
- * release.
- */
-export class Todos extends Array<Todo> implements Observable<TodosEventName, TodosEventRecord> {
-  #observers: Record<TodosEventName, Set<TodosEventObserver>> = {
-    initialize: new Set(),
-    add: new Set(),
-    update: new Set(),
-    delete: new Set(),
-  };
+/** Contains all the todo items. */
+export class Todos extends Observable<TodosEventName, TodosEventRecord> {
+  items: Array<Todo>;
 
   get isEmpty() {
-    return this.length === 0;
+    return this.items.length === 0;
   }
 
-  /**
-   * Adds initial todo items.
-   */
+  constructor(...items: Array<Todo>) {
+    super(['add', 'delete', 'initialize', 'update']);
+    this.items = items;
+  }
+
+  /** Adds initial todo items. */
   initialize(todos: Array<TodoData>) {
-    this.push(...todos.map(data => new Todo(data)));
-    this.notifyObservers('initialize', this);
+    this.items.push(...todos.map(data => new Todo(data)));
+    this.notifyObservers('initialize', this.items);
   }
 
   add(todo: Todo) {
-    this.unshift(todo);
+    this.items.unshift(todo);
     this.notifyObservers('add', todo);
   }
 
@@ -63,7 +56,7 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
    * If the todo item already has a date of completion set, it resets the date.
    */
   update(todoId: string) {
-    const todo = this.find(todo => todo.id === todoId);
+    const todo = this.items.find(todo => todo.id === todoId);
     if (!todo) return;
 
     if (todo.dateCompletedTimestamp) todo.dateCompletedTimestamp = 0;
@@ -72,19 +65,17 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     this.notifyObservers('update', todo);
   }
 
-  /**
-   * Deletes a todo item from the list.
-   */
+  /** Deletes a todo item from the list. */
   delete(todoId: string) {
-    const indexOfTodo = this.findIndex(todo => todo.id === todoId);
+    const indexOfTodo = this.items.findIndex(todo => todo.id === todoId);
     if (indexOfTodo === -1) return;
-    const [todo] = this.splice(indexOfTodo, 1);
+    const [todo] = this.items.splice(indexOfTodo, 1);
     this.notifyObservers('delete', todo);
   }
 
   getNextFocusableItem(direction: -1 | 1): string | void {
     const current = todoFocus.values().next().value;
-    const items = this.toSorted();
+    const items = this.items.toSorted();
     if (!current) return items.at(direction === 1 ? 0 : -1)?.id;
     const indexOfCurrent = items.findIndex(todo => todo.id == current);
     if (indexOfCurrent === -1) return;
@@ -92,28 +83,6 @@ export class Todos extends Array<Todo> implements Observable<TodosEventName, Tod
     if (indexOfNext === -1 || indexOfNext === items.length) return INPUT_ID;
     return items.at(indexOfNext)?.id;
   }
-
-  addObserver<Ev extends TodosEventName>(
-    event: Ev,
-    observer: Observer<Event<Ev, TodosEventRecord[Ev]>>
-  ): void {
-    this.#observers[event].add(observer as TodosEventObserver);
-  }
-
-  removeObserver<Ev extends TodosEventName>(
-    event: Ev,
-    observer: Observer<Event<Ev, TodosEventRecord[Ev]>>
-  ): void {
-    this.#observers[event].delete(observer as TodosEventObserver);
-  }
-
-  notifyObservers<Ev extends TodosEventName>(
-    event: Ev,
-    payload: TodosEventRecord[Ev]
-  ): void {
-    for (const notify of this.#observers[event]) notify({ name: event, payload });
-  }
 }
-
 
 export const todos = new Todos();

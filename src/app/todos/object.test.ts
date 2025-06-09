@@ -1,13 +1,13 @@
 import { describe, it, expect } from "bun:test";
-import { Todos, type TodosEventName } from "./todos";
-import { Todo } from "../data/todo";
+import { Todos, type TodosEventName } from "./object";
+import { Todo } from "@/app/todo/data";
 
 describe('Todos', () => {
   it('should add and read todos', () => {
     const content = 'Learn Ink.';
     const todo = Todo.fromContent(content);
     const todos = new Todos(todo);
-    expect(todos[0]).toMatchObject(todo);
+    expect(todos.items[0]).toMatchObject(todo);
   });
 
   it('should initialize todos', () => {
@@ -15,7 +15,7 @@ describe('Todos', () => {
     const todo = Todo.fromContent(content);
     const todos = new Todos();
     todos.initialize([todo]);
-    expect(todos[0]).toMatchObject(todo);
+    expect(todos.items[0]).toMatchObject(todo);
   });
 
 
@@ -35,12 +35,12 @@ describe('Todos', () => {
     const third = Todo.fromContent('Learn React.');
     const todos = new Todos(first, second, third);
     todos.delete(second.id);
-    const actualIds = todos.map(({ id }) => id);
+    const actualIds = todos.items.map(({ id }) => id);
     expect(actualIds).toEqual([first.id, third.id]);
     todos.delete(first.id);
-    expect(todos[0]).toMatchObject({ id: third.id });
+    expect(todos.items[0]).toMatchObject({ id: third.id });
     todos.delete(third.id);
-    expect(todos.length).toEqual(0);
+    expect(todos.items.length).toEqual(0);
   });
 
   it('should indicate if it is empty', () => {
@@ -63,6 +63,7 @@ describe('Todos', () => {
     const observation: Record<TodosEventName, Todo | null> = {
       add: null,
       delete: null,
+      initialize: null,
       update: null
     };
 

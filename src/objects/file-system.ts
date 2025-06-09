@@ -52,7 +52,7 @@ export class FileSystem {
     try {
       await fs.writeFile(
         filePath,
-        JSON.stringify(this.#todos.map(todo => todo.toJSON()))
+        JSON.stringify(this.#todos.items.map(todo => todo.toJSON()))
       );
     } catch (error) {
       return error as Error;

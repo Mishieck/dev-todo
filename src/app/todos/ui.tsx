@@ -12,11 +12,11 @@ import { useFocusNext } from '@/hooks/focus-next';
 export type TodosProps = {};
 
 export const TodosUi: React.FC<TodosProps> = () => {
-  const [todoItems, setTodoItems] = useState<Array<Todo>>([...todos]);
+  const [todoItems, setTodoItems] = useState<Array<Todo>>([...todos.items]);
   const [isFocused, setIsFocused] = useState(todoFocus.isFocused);
   const focusNext = useFocusNext();
 
-  const updateTodoItems = () => setTodoItems([...todos]);
+  const updateTodoItems = () => setTodoItems([...todos.items]);
 
   const handleDelete = () => {
     const id = todoFocus.values().next().value;

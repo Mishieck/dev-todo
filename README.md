@@ -75,13 +75,21 @@ action(category): content
 
 where
 
-- `action`: is any action associated with the todo item. In addition to the
-  actions used in conventional commit messages, custom actions are allowed. For
-  example, if you would like to add a feature to a project, you can use `feat`
-  as the action.
-- `category`: this is the category to which the todo item belongs. For example,
-  you can use a project name and a project entity as the contents of a category.
-  If you are working on a web app, for example, the category may be
-  `portfolio/landing-page/header`.
-- `content`: a description of the todo item. You can use any description format
-  you like.
+- `action` (optional): is any action associated with the todo item. In addition
+  to the actions used in conventional commit messages, custom actions are 
+  allowed. For example, if you would like to add a feature to a project, you can
+  use `feat` as the action.
+- `category` (optional): this is the category to which the todo item belongs.
+  For example, you can use a project name and a project entity as the contents
+  of a category. If you are working on a web app, for example, the category may
+  be `portfolio/landing-page/header`.
+- `content` (required): a description of the todo item. You can use any
+  description format you like.
+
+### Examples
+
+The following todo item text are all valid:
+
+- Only `content`: `Create portfolio website`
+- With `action`: `feat: Update header hero on landing page of portfolio website`
+- Width `action` and `category`: `fix(portfolio/landing-page/navbar): Hide social media links on mobile`

@@ -1,12 +1,10 @@
 import fs from 'node:fs/promises';
 import type { TodoData } from "@/app/todo/data";
 import type { Todos } from "@/app/todos/object";
-import type { TodoDataV010 } from '@/app/todo/data';
 
 export class FileSystem {
   #todos: Todos;
 
-  static todoListFilePathEnvVarV010 = 'INK_BUN_TODO_LIST_FILE';
   static todoListFilePathEnvVar = 'DEV_TODO';
 
   constructor(todos: Todos) {
@@ -25,7 +23,7 @@ export class FileSystem {
       : new Error(`Todo list file environment variable is not set.`);
   }
 
-  static async read(): Promise<Array<TodoData | TodoDataV010> | Error> {
+  static async read(): Promise<Array<TodoData> | Error> {
     const filePath = this.filePath;
     if (filePath instanceof Error) return filePath;
     const fileContents = await fs.readFile(filePath);

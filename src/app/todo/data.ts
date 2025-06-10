@@ -32,8 +32,6 @@ export type SyntaxMatches = Partial<{
   content: string;
 }>;
 
-export type TodoDataV010 = Omit<TodoData, 'action' | 'category'>;
-
 export class Todo extends TodoData {
   static defaultDate = new Date(0);
 
@@ -56,10 +54,6 @@ export class Todo extends TodoData {
       dateCreatedTimestamp: Date.now(),
       dateCompletedTimestamp: 0
     });
-  }
-
-  static fromDataV010(data: TodoDataV010): TodoData {
-    return { ...data, action: null, category: null };
   }
 
   static generateId() {

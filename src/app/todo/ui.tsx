@@ -2,12 +2,18 @@ import React, { useEffect } from 'react';
 import { Box, Spacer, Text, useFocus } from "ink";
 import { Todo } from "./data"
 import { todoFocus } from '@/objects/todo-focus';
-import { WithBadge, type Badge } from './components/with-badge';
+import { WithBadge, type Badge, type BadgeColors } from './components/with-badge';
 import { Either } from '@/components/either';
 import { Maybe } from '@/components/maybe';
+import { fileSystem } from '@/objects/file-system';
 
 export type TodoProps = {
   todo: Todo;
+};
+
+const defaultActionColors: BadgeColors = {
+  background: 'blue',
+  foreground: 'white'
 };
 
 const badges: Record<string, Badge> = {
@@ -47,6 +53,10 @@ export const TodoUi: React.FC<TodoProps> = props => {
     action
   } = todo;
 
+  const actionColors = fileSystem
+    .configuration
+    .actionColors[action ?? ''] ?? defaultActionColors;
+
   const { isFocused } = useFocus({ id });
 
   useEffect(
@@ -63,8 +73,12 @@ export const TodoUi: React.FC<TodoProps> = props => {
         <Box>
           <Text bold>{category}</Text>
           <Spacer />
-          <Text backgroundColor={'blue'} color={'white'}>
-            {' '}{action}{' '}
+          <Text
+            backgroundColor={actionColors.background}
+            color={actionColors.foreground}
+            bold
+          >
+            {' '}{action?.toUpperCase()}{' '}
           </Text>
         </Box>
       </Maybe>

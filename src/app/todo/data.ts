@@ -1,4 +1,3 @@
-
 export abstract class TodoData {
   readonly id: string;
   readonly content: string;

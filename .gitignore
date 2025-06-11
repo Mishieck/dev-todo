@@ -1,6 +1,9 @@
 # Node modules
 node_modules
 
+# Configuration file
+config.json
+
 # Saved todo list
 todos.json
 

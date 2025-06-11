@@ -80,22 +80,6 @@ completed, its status will be reset.
 
 You can delete the current todo item by pressing `d`.
 
-## Configuration
-
-You can configure a custom file for storing todo items. The default file used is
-stored in the same location as the location of the app. The default filename is 
-`todos.json`. To configure a custom file, set the environment variable 
-`DEV_TODO` to the desired file location. The directory in which the file is 
-stored has to exist before attempting to store items there.
-
-### Example
-
-On linux you can use the following configuration in `.bashrc`:
-
-```sh
-DEV_TODO=~/Documents/todos.json
-```
-
 ## Conventional Git Commit Messages Syntax
 
 Only single-line syntax is supported. The following syntax is used:
@@ -124,3 +108,54 @@ The following todo item text are all valid:
 - Only `content`: `Create portfolio website`
 - With `action`: `feat: Update header hero on landing page of portfolio website`
 - Width `action` and `category`: `fix(portfolio/landing-page/navbar): Hide social media links on mobile`
+
+## Configuration
+
+You can configure the path to the todo list file and colors associated with each
+action. To configure a file, set the environment variable `DEV_TODO_CONFIG` to
+the configuration file location. The file is a JSON file with the following
+properties:
+
+- `todoListFile`: the absolute path to a file that is used to store todo items.
+- `actionColors`: the colors for action badges. It is an object where each key
+  is an action and the value is an object with the following properties:
+
+  - `background`: the background color of the badge.
+  - `foreground`: the foreground color of the badge
+
+  The values are the same as those supported by [chalk](). All properties are
+  optional.
+
+### Example
+
+#### Environment Variable
+
+On linux you can use the following configuration in `.bashrc`:
+
+```sh
+export DEV_TODO_CONFIG=~/Documents/todos/config.json
+```
+
+#### File
+
+The file could contain the following configuration:
+
+```json
+{
+  "todoListFile": "/home/username/~Documents/todos/todos.json",
+  "actionColors": {
+    "feat": {
+      "background": "magenta", 
+      "foreground": "white" 
+    },
+    "fix": {
+      "background": "red", 
+      "foreground": "white" 
+    },
+    "test": {
+      "background": "yellow", 
+      "foreground": "black" 
+    }
+  }
+}
+```

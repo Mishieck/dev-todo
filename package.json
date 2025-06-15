@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/Mishieck/dev-todo#readme",
   "scripts": {
-    "dev": "bun run index.tsx"
+    "dev": "bun run index.tsx",
+    "demos-config": "bun ./demos/set-config.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

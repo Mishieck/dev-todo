@@ -5,6 +5,8 @@ A TUI todo app for software developers. It uses
 [Ink](https://github.com/vadimdemedes/ink) and
 [Bun](https://github.com/oven-sh/bun). 
 
+![App](https://github.com/user-attachments/assets/af20d4fc-f357-4412-820f-ef7da774ac1b)
+
 ## Installation
 
 You can install the app using NPM. Run the following command to install:
